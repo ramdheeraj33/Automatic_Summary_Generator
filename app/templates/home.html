@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatic Summary Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+        }
+        input[type="text"], input[type="submit"], button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        input[type="text"] {
+            border: 1px solid #ccc;
+        }
+        input[type="submit"], button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+        .output {
+            margin-top: 20px;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .hidden {
+            display: none;
+        }
+        .download-link {
+            margin-top: 10px;
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        function toggleTranscript() {
+            const section = document.getElementById('transcript');
+            section.classList.toggle('hidden');
+        }
+
+        function downloadSummary() {
+            const summaryText = document.getElementById("summaryText").innerText;
+            const blob = new Blob([summaryText], { type: "text/plain" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "summary.txt";
+            link.click();
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Automatic Summary Generator</h1>
+        <form method="POST" action="/summarize">
+            <label for="url">Enter YouTube URL or document path:</label>
+            <input type="text" name="url" id="url" placeholder="https://www.youtube.com/watch?v=...">
+            <input type="submit" value="Generate Summary">
+        </form>
+
+        {% if summary %}
+        <div class="output">
+            <h3>Generated Summary:</h3>
+            <p id="summaryText">{{ summary }}</p>
+            <button onclick="downloadSummary()">Download Summary</button>
+        </div>
+        {% endif %}
+
+        {% if full_text %}
+        <div class="output">
+            <button onclick="toggleTranscript()">Show Transcript</button>
+            <div id="transcript" class="hidden">
+                <h3>Full Transcribed Text:</h3>
+                <p>{{ full_text }}</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

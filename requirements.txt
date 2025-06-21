@@ -1,0 +1,10 @@
+Flask
+validators
+youtube-transcript-api
+moviepy
+librosa
+pydub
+vosk
+nltk
+PyPDF2
+textract
