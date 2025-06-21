@@ -35,8 +35,7 @@ AutoSummary-BiLSTM/
 │   └── templates/
 │       └── home.html
 ├── screenshots/
-│   ├── input_page.png
-│   ├── output_summary.png
+│   ├── Output.png
 ├── requirements.txt
 ├── README.md
 ```
@@ -45,11 +44,9 @@ AutoSummary-BiLSTM/
 
 ## 📸 Screenshots
 
-> 📥 Input Page  
-![Input](screenshots/input_page.png)
 
 > 📤 Output Summary  
-![Output](screenshots/output_summary.png)
+![Output](screenshots/Output.png)
 
 ---
 
